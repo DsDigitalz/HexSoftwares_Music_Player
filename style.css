@@ -1,0 +1,588 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Dancing+Script:wght@400..700&family=Gilda+Display&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Manrope:wght@200..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Zalando+Sans+SemiExpanded:ital,wght@0,200..900;1,200..900&display=swap'); */
+
+/*-----------------------------------*\
+  #style.css
+\*-----------------------------------*/
+
+/*-----------------------------------*\
+  #CUSTOM PROPERTY
+\*-----------------------------------*/
+:root {
+  --eerie-black_a95: hsl(0, 3%, 13%);
+  --eerie-black_a50: hsla(204, 9%, 11%, 0.5);
+  --eerie-black: hsl(204, 9%, 11%);
+  --gainsboro: hsl(225, 7%, 89%);
+  --charcoal: hsl(203, 9%, 28%);
+  --silver-sand: hsl(208, 12%, 78%);
+  --light-orange: hsl(0, 100%, 64%);
+  --prussian-blue: hsl(196, 100%, 14%);
+  --black: hsl(0, 0%, 0%);
+  --black_a50: hsla(0, 0%, 0%, 0.5);
+  --black_a20: hsla(0, 0%, 0%, 0.2);
+  --light-orange_a8: hsla(17, 98%, 62%, 0.155);
+  --light-orange_a12: hsla(17, 100%, 61%, 0.216);
+  --silver-sand_a8: hsla(208, 12%, 78%, 0.08);
+  --silver-sand_a12: hsla(208, 12%, 78%, 0.12);
+
+  --background: var(--eerie-black);
+  --background-opacity: var(--eerie-black_a95);
+  --on-background: var(--gainsboro);
+  --surface-variant: var(--charcoal);
+  --on-surface-variant: var(--silver-sand);
+  --on-surface-variant-hover: var(--light-orange_a8);
+  --on-surface-variant-focus: var(--light-orange_a12);
+  --primary: var(--light-orange);
+  --on-primary: var(--prussian-blue);
+
+  /* gradient */
+  --gradient: linear-gradient(
+    180deg,
+    hsla(204, 9%, 11%, 0.9) 60%,
+    transparent 120%
+  );
+
+  /* typography */
+  --ff-roboto: "Roboto";
+
+  --headline-sm: 2.4rem;
+  --title-lg: 2.2rem;
+  --label-lg: 1.4rem;
+  --label-md: 1.2rem;
+
+  --fw-400: 400;
+  --fw-500: 500;
+
+  /* shadow */
+  --shadow-1: 0 1px 4px 1px var(--black_a20);
+  --shadow-2: 0 1px 4px 1px var(--black_a50);
+
+  /* border-radius */
+  --radius-24: 24px;
+  --radius-16: 16px;
+  --radius-12: 12px;
+  --radius-pill: 100px;
+  --radius-circle: 50%;
+
+  /* transiton */
+  --transition-1: 200ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-2: 300ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+/*-----------------------------------*\
+  #RESET
+\*-----------------------------------*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+a,
+img,
+span,
+input,
+button {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button {
+  background: none;
+  border: none;
+  font: inherit;
+}
+
+input {
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+html {
+  font-family: var(--ff-roboto);
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--black);
+  color: var(--on-background);
+  font-size: 1.6rem;
+  line-height: 1.5;
+  min-height: 100vh;
+  min-width: 250px;
+  overflow: overlay;
+}
+
+body.modalActive {
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: var(--radius-pill);
+}
+
+body:hover ::-webkit-scrollbar-thumb {
+  background-color: var(--surface-variant);
+}
+
+/*-----------------------------------*\
+  #REUSED STYLE
+\*-----------------------------------*/
+.material-symbols-rounded {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  user-select: none;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-lg {
+  font-size: var(--title-lg);
+  font-weight: var(--fw-500);
+}
+
+.btn-icon {
+  color: var(--on-surface-variant);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-circle);
+  /* Added for vertical alignment fix */
+  display: grid;
+  place-items: center;
+}
+
+.btn-icon:hover {
+  background: var(--on-surface-variant-hover);
+  transition: var(--transition-1);
+}
+
+.btn-icon:is(:focus, :active) {
+  background: var(--on-surface-variant-focus);
+  transition: var(--transition-1);
+}
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.headline-sm {
+  font-size: var(--headline-sm);
+  font-weight: var(--fw-400);
+}
+
+/*-----------------------------------*\
+  #TOP APP BAR
+\*-----------------------------------*/
+.top-bar-wrapper {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 16px 10px;
+  backdrop-filter: blur(50px);
+  z-index: 10;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/*-----------------------------------*\
+  #PLAYER
+\*-----------------------------------*/
+.player {
+  padding: 40px;
+  background-image: var(--gradient);
+  padding-block-start: calc(64px + var(--padding));
+  min-height: 100vh;
+  display: flex;
+  text-align: center;
+  backdrop-filter: blur(30px);
+  overflow: hidden;
+}
+
+.music-banner img {
+  margin-top: 120px;
+  border-radius: var(--radius-24);
+  box-shadow: var(--shadow-2);
+}
+
+.music-content {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.label-wrapper {
+  display: flex;
+  justify-content: center;
+  opacity: 0.8;
+  gap: 10px;
+}
+
+.duration-label {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+/* VOLUME FIXES FOR MOBILE */
+.volume {
+  /* Ensure the button is still flexible inside the player-control */
+  display: none;
+}
+
+.volume .range-wrapper {
+  /* CRITICAL: This hides the volume slider on mobile */
+  display: none;
+}
+
+.artist {
+  opacity: 0.6;
+  font-size: var(--label-lg);
+}
+
+.seek-control {
+  margin-block-end: 20px;
+}
+
+.range-wrapper {
+  position: relative;
+}
+
+.range {
+  margin-top: 30px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.range::-webkit-slider-runnable-track {
+  appearance: none;
+  height: 6px;
+  width: 100%;
+  background: var(--surface-variant);
+  border-radius: var(--radius-pill);
+}
+
+.range-fill {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 6px;
+  background-color: var(--primary);
+  border-radius: var(--radius-pill);
+  pointer-events: none;
+}
+
+.range::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--primary);
+  border-radius: var(--radius-pill);
+  margin-top: -5px;
+  transition: var(--transition-1);
+}
+
+.range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 12px var(--on-surface-variant-hover);
+}
+
+.range::-webkit-slider-thumb:active {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 12px var(--on-surface-variant-focus);
+}
+
+.duration-label {
+  justify-content: space-between;
+  margin-block-start: 12px;
+}
+
+.player-control {
+  /* Centralized control wrapper for mobile */
+  max-width: 300px;
+  margin: 0 auto;
+
+  justify-content: space-between; /* Adjusted for better spacing */
+  display: flex;
+  align-items: center; /* Ensures vertical alignment */
+  gap: 10px;
+}
+
+.player-control .toggle-active {
+  color: var(--primary);
+}
+
+.player-control .play {
+  background-color: var(--surface-variant);
+  color: var(--primary);
+  /* Centering the icon within the circle */
+  display: grid;
+  place-items: center;
+  /* Making it larger than other icons */
+  width: 64px;
+  height: 64px;
+}
+
+.player-control .play.active {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.player-control .btn-icon.active .default-icon,
+.player-control .btn-icon .active-icon {
+  display: none;
+}
+
+.player-control .btn-icon .default-icon,
+.player-control .btn-icon.active .active-icon {
+  display: block;
+}
+
+/*-----------------------------------*\
+  #PLAYLIST
+\*-----------------------------------*/
+/* (Playlist styles remain unchanged) */
+
+.playlist {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 180px;
+  height: 100vh;
+  background-color: var(--background);
+  padding: 28px;
+  border-top-left-radius: var(--radius-16);
+  border-bottom-left-radius: var(--radius-16);
+  box-shadow: var(--shadow-2);
+  overflow-y: overlay;
+  visibility: hidden;
+  transition: var(--transition-2);
+  z-index: 20;
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 0.35s ease, visibility 0s 0.35s;
+}
+
+.playlist:hover::-webkit-scrollbar-thumb {
+  background-color: var(--surface-variant);
+}
+
+.playlist.active {
+  transform: translateX(0);
+  visibility: visible;
+  z-index: 10;
+}
+
+/* Overlay Fade */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--black);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 9;
+}
+
+.overlay.active {
+  opacity: 0.5;
+  pointer-events: auto;
+}
+
+/* Prevent scrolling when modal is open */
+body.modalActive {
+  overflow: hidden;
+}
+
+.music-list {
+  display: grid;
+  gap: 20px;
+}
+
+.music-item {
+  position: relative;
+  border-radius: var(--radius-12);
+  background-color: var(--surface-variant);
+  overflow: hidden;
+}
+
+.music-item .item-icon {
+  position: absolute;
+  inset: 0;
+  background-color: var(--eerie-black_a50);
+  display: grid;
+  place-items: center;
+  opacity: 0;
+}
+
+.music-item.playing .item-icon {
+  opacity: 1;
+}
+
+.music-item .item-icon .material-symbols-rounded {
+  color: var(--primary);
+  font-size: 3rem;
+}
+
+.music-item:is(:hover, :focus-visible, :active, .playing) {
+  outline: 1px solid var(--primary);
+}
+
+/*-----------------------------------*\
+  #MEDIA QUERIES (Responsiveness)
+\*-----------------------------------*/
+
+@media (min-width: 768px) {
+  /* --- Global Resets for Desktop --- */
+  .container {
+    padding-inline: 40px;
+
+  }
+    
+
+  /* --- PLAYER LAYOUT SWITCH (Flex-Row) --- */
+  .player .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .player {
+    min-height: 100vh;
+    padding-block-start: calc(64px + 60px);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 100px;
+  }
+
+  /* --- MUSIC BANNER (Image) --- */
+  .music-banner {
+    flex-shrink: 0;
+    width: 350px;
+  }
+
+  .music-banner img {
+    margin-top: 0;
+    width: 350px;
+    height: 350px;
+  }
+
+  /* --- MUSIC CONTENT (Controls) --- */
+  .music-content {
+    flex-grow: 1;
+    max-width: 450px;
+    margin-top: 0;
+  }
+
+  .headline-sm {
+    text-align: left;
+  }
+
+  .label-wrapper {
+    justify-content: flex-start;
+  }
+
+  .artist {
+    text-align: left;
+  }
+
+  /* --- PLAYER CONTROLS (Desktop Layout) --- */
+  .player-control.wrapper {
+    /* Remove mobile centering styles */
+    margin: 0;
+    max-width: none;
+    /* Adjust spacing */
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  /* --- VOLUME CONTROL (Visibility & Layout) --- */
+  .volume {
+    /* SHOW the volume container horizontally on desktop */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-grow: 1;
+    max-width: 250px;
+    /* Position the volume control strategically within the row */
+        order: -1; /* Place it first in the flex row */
+        flex-grow: 0; /* Don't let it take up too much space */
+        max-width: 200px; /* Give it a controlled size */
+
+  .volume .range-wrapper {
+    /* SHOW the slider on desktop */
+    display: block;
+    flex-grow: 1;
+  }
+
+  /* --- PLAYLIST SIDEBAR --- */
+  .playlist {
+    width: 280px;
+    padding: 28px 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .player .container {
+    gap: 80px;
+  }
+
+  .music-banner {
+    width: 400px;
+  }
+
+  .music-banner img {
+    width: 400px;
+    height: 400px;
+  }
+}
+}
