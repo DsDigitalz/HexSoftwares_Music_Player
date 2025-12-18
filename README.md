@@ -1,8 +1,8 @@
-## Music Player
+# Music Player
 
 - A modern player web application built with HTML, CSS, and JavaScript.
 
-# Features
+## Features
 
 - Responsive Layout: Works on desktop and mobile devices.
 
@@ -12,7 +12,7 @@
 
 - Customizable Styling: Easy-to-modify CSS variables.
 
-# Technologies Used
+## Technologies Used
 
 - HTML5
 
@@ -24,7 +24,7 @@
 
 - -JavaScript for audio playback (script.js)
 
-# File Structure
+## File Structure
 /music-player/
 ├── index.html        # Main HTML file
 ├── style.css         # Custom styling
